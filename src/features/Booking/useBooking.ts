@@ -5,6 +5,7 @@ import { useState } from "react";
 import { LimitOptions } from "../../ui/Filters/PageLimit";
 import { getBookings } from "../../services/BookingApi";
 import { sortOptions } from "./BookingTable";
+import { useAuth } from "../Authentication/AuthProvider";
 
 export function useBooking() {
   const [simpleFilter, setSimpleFilter] = useState({
@@ -15,6 +16,7 @@ export function useBooking() {
   const [sort, setSort] = useState<{ label: string; value: string | number }>(
     sortOptions[0]
   );
+  const { hotel: authHotel } = useAuth();
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,7 +34,7 @@ export function useBooking() {
     queryKey: ["bookings", simpleFilter, sort, search, currentPage, pageLimit],
     queryFn: () =>
       getBookings(
-        "6617a3dac51520bf4181ba50",
+        authHotel?.id as string,
         simpleFilter.value,
         sort.value,
         search,
