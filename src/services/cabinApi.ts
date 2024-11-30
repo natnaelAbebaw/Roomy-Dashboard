@@ -1,3 +1,4 @@
+import { Moment } from "moment";
 import axios from "axios";
 import { baseUrl } from "../constant";
 import {
@@ -35,8 +36,8 @@ export async function getCabin(id: string): Promise<Cabin> {
 
 export async function getCabins(
   hotelId: string,
-  checkoutDate?: moment.Moment | null,
-  checkinDate?: moment.Moment | null,
+  checkoutDate?: Moment | null,
+  checkinDate?: Moment | null,
   numOfGuests?: number
 ): Promise<CabinStat[]> {
   console.log("hotelId", hotelId, checkoutDate, checkinDate);
