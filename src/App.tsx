@@ -36,7 +36,7 @@ function App() {
               <AppDashBoardLayout />
             </ProtectedRoute>
           ),
-          path: "dashboard",
+          path: "/",
           children: [
             {
               path: "",

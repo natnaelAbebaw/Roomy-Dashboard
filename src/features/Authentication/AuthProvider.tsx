@@ -60,7 +60,7 @@ function AuthProvider() {
             hotel: data.hotel,
           })
         );
-        navigate("/dashboard");
+        navigate("/");
       },
     });
   }
