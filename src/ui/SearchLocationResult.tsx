@@ -1,24 +1,19 @@
 import { FaMapMarkerAlt } from "react-icons/fa";
 import styled from "styled-components";
 import PopupBox from "./PopupBox";
+import Flex, { FlexAlign, FlexDirection } from "./Flex";
+import { Spacing } from "./cssConstants";
+import Container, { Length } from "./Container";
 
 const StyledPopupBox = styled(PopupBox)`
   padding: 0;
-`;
-const StyledUl = styled.ul`
-  display: flex;
-  flex-direction: column;
-`;
-const StyledLi = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 5px 1rem;
-  border-radius: 3px;
-  border-bottom: 1px solid var(--color-grey-100);
-  cursor: pointer;
-  &:hover {
-    background-color: var(--color-grey-100);
+  top: 96%;
+
+  .location {
+    cursor: pointer;
+    &:hover {
+      background-color: var(--color-grey-100);
+    }
   }
 `;
 
@@ -55,24 +50,34 @@ function SearchLocationResult({
 }: SearchLocationResultProps) {
   return (
     <StyledPopupBox ref={elementRef}>
-      <StyledUl>
-        {locations.map((location) => (
-          <StyledLi
-            key={location.id}
-            onClick={() => {
-              onSelectLocation(location);
-              onChangeQuery(`${location.city},${location.country}`);
-              onShowResults(false);
-            }}
-          >
-            <FaMapMarkerAlt />
-            <div>
-              <City>{location.city}</City>
-              <Country>{location.country}</Country>
-            </div>
-          </StyledLi>
-        ))}
-      </StyledUl>
+      <Container>
+        <Flex direction={FlexDirection.Column} gap={Spacing.zero}>
+          {locations.map((location) => (
+            <Container
+              className="location"
+              key={location.id}
+              padding={[Spacing.s8, Spacing.s48, Spacing.s8, Spacing.s32]}
+              width={Length.Full}
+            >
+              <Flex
+                width={Length.Full}
+                align={FlexAlign.Center}
+                onClick={() => {
+                  onSelectLocation(location);
+                  onChangeQuery(`${location.city},${location.country}`);
+                  onShowResults(false);
+                }}
+              >
+                <FaMapMarkerAlt />
+                <Flex gap={Spacing.s2} direction={FlexDirection.Column}>
+                  <City>{location.city}</City>
+                  <Country>{location.country}</Country>
+                </Flex>
+              </Flex>
+            </Container>
+          ))}
+        </Flex>
+      </Container>
     </StyledPopupBox>
   );
 }

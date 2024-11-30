@@ -1,19 +1,17 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./pages/website/Home";
 import GlobalStyle from "./style/globalStyles";
 import { ReactQueryDevtools } from "react-query-devtools";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AppLayout from "./ui/AppLayout";
-import HotelDetails from "./pages/website/HotelDetails";
-import AppDashBoardLayout from "./ui/Dashboard/AppDashBoardLayout";
+import AppDashBoardLayout from "./ui/AppDashBoardLayout";
 import { Toaster } from "react-hot-toast";
 import { Color } from "./ui/cssConstants";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Room from "./pages/dashboard/Room";
-import Booking from "./pages/dashboard/Booking";
-import LoginForm from "./features/Dashboard/Authentication/LoginForm";
-import AuthProvider from "./features/Dashboard/Authentication/AuthProvider";
-import ProtectedRoute from "./features/Dashboard/Authentication/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
+import Room from "./pages/Room";
+import Booking from "./pages/Booking";
+import LoginForm from "./features/Authentication/LoginForm";
+import AuthProvider from "./features/Authentication/AuthProvider";
+import ProtectedRoute from "./features/Authentication/ProtectedRoute";
+import ToBeImplemented from "./ui/ToBeImplemented";
 
 function App() {
   const queryClient = new QueryClient({
@@ -31,19 +29,6 @@ function App() {
         {
           element: <LoginForm />,
           path: "login",
-        },
-        {
-          element: <AppLayout />,
-          children: [
-            {
-              path: "/",
-              element: <Home />,
-            },
-            {
-              path: "/hotels/:hotelId",
-              element: <HotelDetails />,
-            },
-          ],
         },
         {
           element: (
@@ -64,6 +49,18 @@ function App() {
             {
               path: "bookings",
               element: <Booking />,
+            },
+            {
+              path: "users",
+              element: <ToBeImplemented />,
+            },
+            {
+              path: "reviews",
+              element: <ToBeImplemented />,
+            },
+            {
+              path: "settings",
+              element: <ToBeImplemented />,
             },
           ],
         },

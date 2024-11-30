@@ -3,6 +3,7 @@
   box-shadow: 0 10px 30px rgb(0, 0, 0, 0.1);
   background-color: transparent; /* Remove borders around the calendar */
   border-radius: 5px;
+  font-family: inherit;
 }
 
 /* .DayPicker::after {
@@ -24,6 +25,18 @@
   display: none;
 }
 
+.DateRangePicker_picker {
+  z-index: 1000;
+  font-family: inherit;
+}
+
+.DateRangePickerInput_arrow_svg {
+  margin-right: 1rem;
+  margin-top: 0;
+  height: 2rem;
+  width: 3rem;
+}
+
 .DateInput_input__focused {
   border: none;
   outline: none;
@@ -33,8 +46,9 @@
 .DateInput_input {
   font-family: inherit;
   font-size: 1.6rem;
-  color: var(--color-grey-500);
-  padding: 1.2rem 0;
+  color: var(--color-grey-600);
+  font-weight: 400;
+  padding: 8px 0;
 }
 
 .DateRangePickerInput_arrow_svg {
@@ -43,13 +57,19 @@
 
 .DateInput {
   width: 10rem;
+  font-family: inherit;
+}
+
+.DateRangePickerInput {
+  display: flex;
+  align-items: center;
 }
 
 .DateInput_input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: inherit;
   font-size: 1.6rem;
   font-weight: 300;
-  color: var(--color-grey-400);
+  color: var(--color-grey-500);
 }
 
 .DateInput_input:focus {
@@ -67,12 +87,8 @@
   border: none; /* Remove borders around individual days */
 }
 
-.DayPicker {
-  font-family: "Poppins", sans-serif; /* Change the font family of the calendar */
-}
-
 .CalendarDay {
-  font-family: "Poppins", sans-serif; /* Change the font family of the calendar days */
+  font-family: inherit; /* Change the font family of the calendar days */
 }
 
 .CalendarDay__selected_span {

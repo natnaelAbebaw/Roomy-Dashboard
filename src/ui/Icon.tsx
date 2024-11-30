@@ -1,11 +1,12 @@
 import React from "react";
+import { Font } from "./cssConstants";
 
 type IconProps = React.ComponentProps<"div"> & {
   children: React.ReactElement;
-  fontSize?: string;
+  fontSize?: Font;
 };
 
-function Icon({ children, fontSize = "2.4rem", ...props }: IconProps) {
+function Icon({ children, fontSize = Font.fs24, ...props }: IconProps) {
   return React.Children.map(children, (child) =>
     React.cloneElement(child, { fontSize: fontSize, ...props })
   );

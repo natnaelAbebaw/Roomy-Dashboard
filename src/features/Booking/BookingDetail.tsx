@@ -18,6 +18,7 @@ import { useHotel } from "./useHotel";
 import Modal from "../../ui/Modal";
 import DeletePopup from "../../ui/DeletePopup";
 import { useDeleteBooking } from "./useDeleteBooking";
+import { useAuth } from "../Authentication/AuthProvider";
 
 const BookingStatusMapBgColor: Record<BookingStatus, Color> = {
   [BookingStatus.UNCONFIRMED]: Color.blue100,
@@ -32,6 +33,7 @@ const BookingStatusMapColor: Record<BookingStatus, Color> = {
 };
 
 function BookingDetail({ booking }: { booking: Booking }) {
+  const { hotel: authHotel } = useAuth();
   const [confirm, setConfirm] = useState(false);
   const { UpdateBooking, isUpdateBookingLoading } = useUpdateBooking();
   const { DeleteBooking, isDeleteBookingLoading } = useDeleteBooking();
@@ -41,7 +43,7 @@ function BookingDetail({ booking }: { booking: Booking }) {
   function handleCheckin() {
     UpdateBooking({
       bookingId: booking._id,
-      hotelId: "6617a3dac51520bf4181ba50",
+      hotelId: authHotel?.id as string,
       updatedData: {
         status: BookingStatus.CHECKIN,
         paymentStatus: PaymentStatus.PAID,
@@ -62,7 +64,7 @@ function BookingDetail({ booking }: { booking: Booking }) {
   function handleCheckout() {
     UpdateBooking({
       bookingId: booking._id,
-      hotelId: "6617a3dac51520bf4181ba50",
+      hotelId: authHotel?.id as string,
       updatedData: {
         status: BookingStatus.CHECKEDOUT,
       },
@@ -72,7 +74,7 @@ function BookingDetail({ booking }: { booking: Booking }) {
   function handleDeleteBooking() {
     DeleteBooking({
       bookingId: booking._id,
-      hotelId: "6617a3dac51520bf4181ba50",
+      hotelId: authHotel?.id as string,
     });
   }
 

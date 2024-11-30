@@ -1,19 +1,20 @@
 import styled from "styled-components";
+import { Font } from "./cssConstants";
 
-const StyledBrandLogo = styled.div`
-  font-size: 4.4rem;
-  font-family: "Kanit", sans-serif;
+const StyledBrandLogo = styled.a`
+  font-size: ${Font.fs30};
+
   font-weight: 700;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  letter-spacing: 0.8px;
+  /* letter-spacing: 0.8px; */
 `;
 const StyleSpan = styled.span`
   color: var(--color-brand-700);
+  font-weight: 400;
 `;
-const StlyedBrand = styled.div`
-  font-size: 2.4rem;
-`;
+const StlyedBrand = styled.div``;
 
 function BrandLogo() {
   return (

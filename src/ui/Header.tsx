@@ -1,39 +1,69 @@
 import styled, { css } from "styled-components";
 import BrandLogo from "./BrandLogo";
-import Button from "./Button";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import Button, { ButtonType } from "./Button";
+import { Color, Spacing } from "./cssConstants";
+import {
+  SearchFormActionType,
+  useGlobalContext,
+} from "../context/GlobalContext";
+import { Length } from "./Container";
 type StyleHeaderProps = {
-  isSticky: boolean;
+  searchFormState?: SearchFormActionType;
+  isFixed?: string | undefined;
+  mb?: string;
+  padding?: (Spacing | Length)[];
 };
 
 const StyleHeader = styled.header<StyleHeaderProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 1;
+  background-color: var(--color-grey-0);
+  transition: all 0.1s;
+  position: relative;
+  z-index: 3;
+  padding: ${({ padding }) => padding?.join(" ")};
+  /* ${(props) =>
+    props.searchFormState === SearchFormActionType.stickyOnTop &&
+    css<StyleHeaderProps>``} */
+
   ${(props) =>
-    props.isSticky
-      ? css`
-          padding: 2rem 10rem 18rem 10rem;
-          background-color: var(--color-grey-0);
-        `
-      : css`
-          padding: 2rem 10rem;
-          background-color: rgba(255, 255, 255, 0.3);
-        `}
+    props.searchFormState === SearchFormActionType.hangOnTop &&
+    css`
+      padding: 2rem 10rem 16rem 10rem;
+    `}
+
+  ${(props) =>
+    props.isFixed &&
+    css`
+      position: fixed;
+      top: 0;
+      z-index: 3;
+    `}
 `;
 
-function Header() {
-  const { isSticky } = useSelector((state: RootState) => state.hotels);
-
+function Header({
+  isFixed = false,
+  mb = Spacing.s4,
+  padding,
+}: {
+  isFixed?: boolean;
+  mb?: string;
+  padding?: (Spacing | Length)[];
+}) {
+  const { searchFormState } = useGlobalContext();
   return (
-    <StyleHeader isSticky={isSticky}>
+    <StyleHeader
+      padding={padding}
+      isFixed={isFixed ? `${isFixed}` : undefined}
+      searchFormState={searchFormState}
+      mb={mb}
+    >
       <BrandLogo />
-      <Button type="outline">login</Button>
+      <Button buttonType={ButtonType.Outline} color={Color.brand700}>
+        login
+      </Button>
     </StyleHeader>
   );
 }
